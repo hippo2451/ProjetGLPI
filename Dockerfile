@@ -1,5 +1,7 @@
 FROM ubuntu:22.04
 MAINTAINER Hippolyte MOFFO(hippo2451@yahoo.com)
+RUN useradd --uid 10000 runner
+USER 10000
 WORKDIR  /tmp/
 RUN apt-get update
 EXPOSE 80
