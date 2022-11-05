@@ -12,6 +12,6 @@ RUN rm -Rf glpi-10.0.2.tgz
 RUN cp -r glpi/* /var/www/html/
 RUN chmod 755 -R /var/www/html/
 RUN chown www-data:www-data -R /var/www/html/
+ENTRYPOINT ["/usr/sbin/apache2ctl", "-D", "FOREGROUND"]
 RUN useradd --uid 10000 runner
 USER 10000
-ENTRYPOINT ["/usr/sbin/apache2ctl", "-D", "FOREGROUND"]
