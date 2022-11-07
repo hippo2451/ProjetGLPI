@@ -10,8 +10,8 @@ RUN wget https://github.com/glpi-project/glpi/releases/download/10.0.2/glpi-10.0
 RUN tar -xvf glpi-10.0.2.tgz
 RUN rm -Rf glpi-10.0.2.tgz
 RUN cp -r glpi/* /var/www/html/
-RUN useradd --uid 10000 www-data
-USER 10000
+RUN useradd --uid 10000 user
+USER user
 RUN chmod 755 -R /var/www/html/
-RUN chown www-data:www-data -R /var/www/html/
+RUN chown user:user -R /var/www/html/
 ENTRYPOINT ["/usr/sbin/apache2ctl", "-D", "FOREGROUND"]
