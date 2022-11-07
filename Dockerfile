@@ -1,6 +1,5 @@
 FROM ubuntu:22.04
 MAINTAINER Hippolyte MOFFO(hippo2451@yahoo.com)
-USER root
 WORKDIR  /tmp/
 EXPOSE 8080
 RUN apt-get update
