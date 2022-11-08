@@ -12,5 +12,6 @@ RUN cp -r glpi/* /var/www/html/
 RUN useradd --uid 10000 user
 RUN chmod 755 -R /var/www/html/
 RUN chown user:user -R /var/www/html/
+RUN chown user:user -R /usr/sbin/apache2ctl
 ENTRYPOINT ["/usr/sbin/apache2ctl", "-D", "FOREGROUND"]
 USER user
