@@ -1,7 +1,7 @@
 provider "aws" {
   region     = "us-east-1"
-  access_key = "AKIAT3NKXKYBYMP2JNFQ"
-  secret_key = "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"
+  access_key = ""
+  secret_key = ""
 }
 
 terraform {
@@ -9,8 +9,8 @@ terraform {
     bucket = "terraformtraininghippo"
     key    = "hippo.tfstate"
     region = "us-east-1"
-    access_key = "AKIAT3NKXKYBYMP2JNFQ"
-    secret_key = "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"
+    access_key = ""
+    secret_key = ""
   }
 }
 data "aws_ami" "app_ami" {
