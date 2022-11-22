@@ -12,6 +12,12 @@ pipeline {
         
         stage ("terraform init") {
             steps {
+                withCredentials([[
+    $class: 'AmazonWebServicesCredentialsBinding',
+    credentialsId: "aws_terraform",
+    accessKeyVariable: 'AWS_ACCESS_KEY_ID',
+    secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
+]])
                 sh ('terraform init') 
             }
         }
