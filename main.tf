@@ -1,5 +1,7 @@
 provider "aws" {
   region     = "us-east-1"
+  access_key = "{{access_key}}"
+  secret_key = "{{secret_key}}"
  
 }
 
@@ -8,6 +10,8 @@ terraform {
     bucket = "backend-terraform-moffo"
     key    = "hippo.tfstate"
     region = "us-east-1"
+    access_key = "{{access_key}}"
+    secret_key = "{{secret_key}}"
  
   }
 }
