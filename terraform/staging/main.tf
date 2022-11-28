@@ -4,7 +4,7 @@ provider "aws" {
 
 terraform {
   backend "s3" {
-    bucket = "terraformtraininghippo"
+    bucket = "backend-terraform-moffo"
     key    = "hippo.staging.tfstate"
     region = "us-east-1"
   }
