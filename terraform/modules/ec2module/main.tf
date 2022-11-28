@@ -49,10 +49,7 @@ resource "aws_instance" "myec2" {
   key_name        = "devops"
   tags            = var.aws_common_tag
   security_groups = ["${aws_security_group.allow_ssh_http_https.name}"]
-  provisioner "local-exec" {
-    command = "echo PUBLIC IP: ${aws_instance.myec2.public_ip} ; ID :${aws_instance.myec2.id} ; AZ: ${aws_instance.myec2.availability_zone} >> infos.ec2.txt"
-  }
-  
+ 
 
 }
 
