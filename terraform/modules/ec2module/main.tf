@@ -50,6 +50,9 @@ resource "aws_instance" "myec2" {
   tags            = var.aws_common_tag
   security_groups = ["${aws_security_group.allow_ssh_http_https.name}"]
  
+ provisioner "local-exec" {
+    command = "echo ${aws_instance.ec2.public_ip} >> ./ansible/hosts"
+  }
 
 }
 
