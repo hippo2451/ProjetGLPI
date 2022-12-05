@@ -18,9 +18,11 @@ module "ec2" {
     name = "ec2-staging-hippo"
   }
   sg_name = "staging-sg-hippo"
-
-}
-provisioner "local-exec" {
+  
+  provisioner "local-exec" {
     command = "echo ${aws_instance.ec2.public_ip} >> ./ansible/hosts"
   }
+
+}
+
 
