@@ -5,6 +5,25 @@
   vars_files:
  
   tasks:
+    roles:
+      - { role: install_docker}
+      
+   - name: copy Docker Compose files
+  copy:
+    src: files/{{ item }}
+    dest: /somewhere/yourproject/{{ item }}
+  loop:
+  - docker-compose.yml
+  - docker-compose.prod.yml
+
+# use files parameter to use multiple docker-compose.yml files
+- name: deploy Docker Compose stack
+  community.docker.docker_compose:
+    project_src: /somewhere/yourproject
+    files:
+    - docker-compose.yml
+    - docker-compose.prod.yml
+
     - name: copy site template
       ansible.builtin.template:
         src: index.html.j2
