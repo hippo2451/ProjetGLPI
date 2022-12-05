@@ -8,31 +8,21 @@
     roles:
       - { role: install_docker}
       
+    - name: ansible create GLPI directory
+    file:
+      path: /tmp/GLPI
+      state: directory
+      
    - name: copy Docker Compose files
   copy:
     src: files/{{ item }}
-    dest: /somewhere/yourproject/{{ item }}
+    dest: /tmp/GLPI/{{ item }}
   loop:
   - docker-compose.yml
-  - docker-compose.prod.yml
+  - Dockerfile
 
-# use files parameter to use multiple docker-compose.yml files
 - name: deploy Docker Compose stack
   community.docker.docker_compose:
-    project_src: /somewhere/yourproject
+    project_src: /tmp/GLPI
     files:
     - docker-compose.yml
-    - docker-compose.prod.yml
-
-    - name: copy site template
-      ansible.builtin.template:
-        src: index.html.j2
-        dest: /home/admin/index.html
-    - name: Create a docker container
-      docker_container:
-        name: webapp
-        image: httpd
-        ports:
-          - "80:80"
-        volumes:
-          - /home/admin/index.html:/usr/local/apache2/htdocs/index.html
