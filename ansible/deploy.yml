@@ -3,25 +3,7 @@
   hosts: prod
  
   vars_files:
-  pre_tasks:
-    - name: install some package
-      ansible.builtin.package: 
-        name:'{{ item }}' state: present
-      when: ansible_distribution == 'Centos'
-      loop:
-        - wget
-        - git
-        -
-    - name: download pip script
-      get_url:
-        url: https://bootstrap.pypa.io/pip/2.7/get-pip.py
-        dest: /tmp/get-pip.py
-    - name: install python-pip
-      command: python2.7 /tmp/get-pip.py
-      changed_when: false
-
-    - name: Install docker python
-      pip: name=docker-py
+ 
   tasks:
     - name: copy site template
       ansible.builtin.template:
