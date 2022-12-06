@@ -1,12 +1,14 @@
 ---
 - name: "Apache installation using docker container"
   hosts: all
+  
+   roles:
+      - { role: install_docker}
  
   vars_files:
  
   tasks:
-    roles:
-      - { role: install_docker}
+  
       
     - name: ansible create GLPI directory
     file:
