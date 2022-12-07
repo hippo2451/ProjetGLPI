@@ -1,15 +1,12 @@
 pipeline {
     agent any
-    
     stages {
+        
         stage('nettoyage workspace') {
             steps {
                 cleanWs()
             }
         }
-    }
-
-    stages {
         stage('Checkout') {
             steps {
         
