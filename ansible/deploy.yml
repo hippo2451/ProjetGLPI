@@ -9,17 +9,17 @@
   
       
     - name: ansible create GLPI directory
-    file:
-      path: /tmp/GLPI
-      state: directory
+      file:
+        path: /tmp/GLPI
+        state: directory
       
-   - name: copy Docker Compose files
-  copy:
-    src: files/{{ item }}
-    dest: /tmp/GLPI/{{ item }}
-  loop:
-  - docker-compose.yml
-  - Dockerfile
+    - name: copy Docker Compose files
+      copy:
+        src: files/{{ item }}
+        dest: /tmp/GLPI/{{ item }}
+      loop:
+        - docker-compose.yml
+        - Dockerfile
 
 - name: deploy Docker Compose stack
   community.docker.docker_compose:
