@@ -21,8 +21,8 @@
         - docker-compose.yml
         - Dockerfile
 
-- name: deploy Docker Compose stack
-  community.docker.docker_compose:
-    project_src: /tmp/GLPI
-    files:
-    - docker-compose.yml
+    - name: deploy Docker Compose stack
+      docker_compose:
+       project_src: /tmp/GLPI
+        files:
+         - docker-compose.yml
