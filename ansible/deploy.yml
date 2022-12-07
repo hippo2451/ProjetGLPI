@@ -3,7 +3,7 @@
   hosts: all
   
    roles:
-      - { role: install_docker}
+      - role: install_docker
  
   vars_files:
  
