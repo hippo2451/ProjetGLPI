@@ -23,6 +23,4 @@
 
     - name: deploy Docker Compose stack
       docker_compose:
-       project_src: /tmp/GLPI
-        files:
-         - docker-compose.yml
+       project_src: /tmp/GLPI/
