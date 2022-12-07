@@ -1,7 +1,4 @@
 ---
-- name: "AWS - Install docker"
-
-  become: yes
   tasks:
     - name: Update all packages
       yum:
