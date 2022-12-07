@@ -1,6 +1,6 @@
 ---
 - name: "AWS - Install docker"
-  hosts: all
+
   become: yes
   tasks:
     - name: Update all packages
