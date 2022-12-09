@@ -44,6 +44,15 @@ pipeline {
            }
         }
     
+        
+         stage('Wait EC2') {
+      steps {
+        sh '''
+          aws ec2 wait instance-status-ok --region ap-southeast-1 --instance-ids `$(terraform output -json ec2_id_test) | awk -F'"' '{print $2}'`
+        '''
+      }
+    }
+
     stage ("deploy ansible playbook") {
             steps {
            
