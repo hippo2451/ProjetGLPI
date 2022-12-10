@@ -1,3 +1,3 @@
 output "ec2_id_test" {
-  value = "${module.ec2module.id}" 
+  value = "${module.ec2.id}" 
 }
