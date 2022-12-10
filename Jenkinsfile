@@ -45,14 +45,21 @@ pipeline {
         }
     
         
-         stage('Wait EC2') {
-      steps {
+           stage ("apply staging") {
+            steps {
+                withCredentials([[
+    $class: 'AmazonWebServicesCredentialsBinding',
+    credentialsId: "aws_terraform",
+    accessKeyVariable: 'AWS_ACCESS_KEY_ID',
+    secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
+                ]]){
         sh '''
           cd ./terraform/staging/
           aws ec2 wait instance-status-ok --region us-east-1 --instance-ids `$(terraform output -json ec2_id_test) | awk -F'"' '{print $2}'`
         '''
       }
     }
+   }
 
     stage ("deploy ansible playbook") {
             steps {
