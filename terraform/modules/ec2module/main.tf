@@ -59,7 +59,7 @@ resource "aws_eip" "lb" {
   instance = aws_instance.myec2.id
   vpc      = true
    provisioner "local-exec" {
-    command = "echo ${aws_eiplb.public_ip} >> hosts"
+    command = "echo ${aws_eip.lb.public_ip} >> hosts"
   }
 }
 
