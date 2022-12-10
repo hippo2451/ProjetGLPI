@@ -45,7 +45,7 @@ pipeline {
         }
     
         
-           stage ("apply staging") {
+           stage ("wait for staging instance to start") {
             steps {
                 withCredentials([[
     $class: 'AmazonWebServicesCredentialsBinding',
