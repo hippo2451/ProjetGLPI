@@ -50,9 +50,7 @@ resource "aws_instance" "myec2" {
   tags            = var.aws_common_tag
   security_groups = ["${aws_security_group.allow_ssh_http_https.name}"]
  
- provisioner "local-exec" {
-    command = "echo ${aws_instance.myec2.public_ip} >> hosts"
-  }
+
 
 }
 
@@ -60,5 +58,8 @@ resource "aws_instance" "myec2" {
 resource "aws_eip" "lb" {
   instance = aws_instance.myec2.id
   vpc      = true
+   provisioner "local-exec" {
+    command = "echo ${aws_eiplb.public_ip} >> hosts"
+  }
 }
 
