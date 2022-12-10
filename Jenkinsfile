@@ -48,6 +48,7 @@ pipeline {
          stage('Wait EC2') {
       steps {
         sh '''
+          cd ./terraform/staging/
           aws ec2 wait instance-status-ok --region us-east-1 --instance-ids `$(terraform output -json ec2_id_test) | awk -F'"' '{print $2}'`
         '''
       }
