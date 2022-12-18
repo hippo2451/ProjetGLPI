@@ -1,8 +1,4 @@
 ---
-  - name: Docker install
-    hosts: all
-    become: yes
-    tasks:
         - name: Install docker-ce (centos) via amazon-linux-extras packages
           shell: "amazon-linux-extras install docker -y"
         - name: Install dependencies
