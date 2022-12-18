@@ -9,7 +9,6 @@ services:
       - MYSQL_DATABASE=glpidb
       - MYSQL_USER=glpidb
       - MYSQL_PASSWORD=glpidb
-
   glpi:
     build:
         context: .
