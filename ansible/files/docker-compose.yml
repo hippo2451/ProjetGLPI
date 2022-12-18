@@ -5,7 +5,7 @@ services:
     container_name: mysql
     hostname: mysql
     environment:
-      - MYSQL_ROOT_PASSWORD=admin	
+      - MYSQL_ROOT_PASSWORD=admin
       - MYSQL_DATABASE=glpidb
       - MYSQL_USER=glpidb
       - MYSQL_PASSWORD=glpidb
