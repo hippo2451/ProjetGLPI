@@ -128,7 +128,7 @@ pipeline {
     stage ("deploy ansible playbook") {
             steps {
            
-                ansiblePlaybook colorized: true, credentialsId: 'open_ssh_aws', disableHostKeyChecking: true, inventory: 'terraform/staging/hosts', playbook: 'ansible/deploy.yml'
+                ansiblePlaybook colorized: true, credentialsId: 'open_ssh_aws', disableHostKeyChecking: true, inventory: 'terraform/prod/hosts', playbook: 'ansible/deploy.yml'
                 }
            }
     }
