@@ -77,5 +77,59 @@ pipeline {
               
                 }
             }
+        
+        
+         stage ("terraform init prod") {
+            steps {
+                withCredentials([[
+    $class: 'AmazonWebServicesCredentialsBinding',
+    credentialsId: "aws_terraform",
+    accessKeyVariable: 'AWS_ACCESS_KEY_ID',
+    secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
+                ]]){
+                sh '''cd ./terraform/prod/
+              terraform init 
+              '''
+                }
+            }
+        }
+        
+        stage ("apply staging") {
+            steps {
+                withCredentials([[
+    $class: 'AmazonWebServicesCredentialsBinding',
+    credentialsId: "aws_terraform",
+    accessKeyVariable: 'AWS_ACCESS_KEY_ID',
+    secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
+                ]]){
+                sh '''cd ./terraform/prod/
+                    terraform apply -auto-approve'''
+                }
+           }
+        }
+    
+        
+           stage ("wait for prod instance to start") {
+            steps {
+                withCredentials([[
+    $class: 'AmazonWebServicesCredentialsBinding',
+    credentialsId: "aws_terraform",
+    accessKeyVariable: 'AWS_ACCESS_KEY_ID',
+    secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'
+                ]]){
+        sh '''
+          cd ./terraform/prod/
+          aws ec2 wait instance-status-ok --region us-east-1 --instance-ids `$(terraform output -json ec2_id_test) | awk -F'"' '{print $2}'`
+        '''
+      }
+    }
+   }
+
+    stage ("deploy ansible playbook") {
+            steps {
+           
+                ansiblePlaybook colorized: true, credentialsId: 'open_ssh_aws', disableHostKeyChecking: true, inventory: 'terraform/staging/hosts', playbook: 'ansible/deploy.yml'
+                }
+           }
     }
 }
