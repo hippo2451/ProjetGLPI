@@ -62,7 +62,7 @@ pipeline {
     }
    }
 
-    stage ("deploy ansible playbook") {
+    stage ("deploy staging ansible playbook") {
             steps {
            
                 ansiblePlaybook colorized: true, credentialsId: 'open_ssh_aws', disableHostKeyChecking: true, inventory: 'terraform/staging/hosts', playbook: 'ansible/deploy.yml'
@@ -94,7 +94,7 @@ pipeline {
             }
         }
         
-        stage ("apply staging") {
+        stage ("apply prod") {
             steps {
                 withCredentials([[
     $class: 'AmazonWebServicesCredentialsBinding',
@@ -125,7 +125,7 @@ pipeline {
     }
    }
 
-    stage ("deploy ansible playbook") {
+    stage ("deploy prod ansible playbook") {
             steps {
            
                 ansiblePlaybook colorized: true, credentialsId: 'open_ssh_aws', disableHostKeyChecking: true, inventory: 'terraform/prod/hosts', playbook: 'ansible/deploy.yml'
