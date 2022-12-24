@@ -69,17 +69,12 @@ pipeline {
                 }
            }
         
-    
-        stage('proceed to deploy on prod') {
-            input {
+         stage ("terraform init prod") {
+             input {
                 message "Should we deploy on prod?"
                 ok "Yes, we should."
               
                 }
-            }
-        
-        
-         stage ("terraform init prod") {
             steps {
                 withCredentials([[
     $class: 'AmazonWebServicesCredentialsBinding',
