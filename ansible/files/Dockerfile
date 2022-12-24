@@ -9,6 +9,6 @@ RUN apt-get update && \
     tar -xvf glpi-10.0.2.tgz && \
     rm -Rf glpi-10.0.2.tgz && \
     cp -r glpi/* /var/www/html/ && \
-    chmod 755 -R /var/www/html/ 
+    chmod 755 -R /var/www/html/ && \
     chown www-data:www-data -R /var/www/html/
 ENTRYPOINT ["/usr/sbin/apache2ctl", "-D", "FOREGROUND"]
