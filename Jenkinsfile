@@ -70,5 +70,12 @@ pipeline {
            }
         
     
+        stage('proceed to deploy on prod') {
+            input {
+                message "Should we deploy on prod?"
+                ok "Yes, we should."
+              
+                }
+            }
     }
 }
