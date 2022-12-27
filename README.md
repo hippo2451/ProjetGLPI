@@ -23,13 +23,13 @@ ci dessous certain objectif de ce projet
 - [3. configuration initial de JENKINS ](#32-initial-setup-with-jenkins)
         - [3.1 Jenkins credentials](#321-jenkins-credentials)
         - [3.2 les plugins Jenkins à installer ](#322-jenkins-plugins)
-        - [3.3 creations du pipeline jenkins ](#323-create-jenkins-multibranch-pipeline)
+        - [3.3 creations du pipeline jenkins ] (#323-create-jenkins-multibranch-pipeline)
 
 
 
 
 
-##1 . creation d'un compartiment S3 pour le stockage des fichier state
+## 1. creation d'un compartiment S3 pour le stockage des fichier state
 
 Connectez-vous à la AWS Management Console et ouvrez la console Amazon S3 à l'adresse https://console.aws.amazon.com/s3/
 
