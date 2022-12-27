@@ -12,24 +12,21 @@ ci dessous certain objectif de ce projet
 
 
 ## Table de materière 
-- [1. creation d'un compartiment S3 pour le stockage des fichier state]
+- [1. creation d'un compartiment S3 pour le stockage des fichier state](#1-creation-dun-compartiment-S3-pour-le-stockage-des-fichier-state)
     
-- [2. Installation du serveur Jenkins]
-    
-    - [2.2 Installation de Terraform, AWS CLI, Ansible sur le serveur JENKINS](#22-install-terraform-aws-cli-ansible-inside-jenkins)
+- [2. Installation du serveur Jenkins](#2-Installation-du-serveur-Jenkins)
+
+    - [2.1 Installation de  JENKINS](#21-Installation-de-JENKINS)
+    - [2.2 Installation de Terraform, AWS CLI, Ansible sur le serveur JENKINS](#22-Installation-de-Terraform-AWS-CLI-Ansible-sur-le-serveur-JENKINS)
 	
 	
 
-- [3. configuration initial de JENKINS ](#32-initial-setup-with-jenkins)
-        - [3.1 Jenkins credentials](#321-jenkins-credentials)
-        - [3.2 les plugins Jenkins à installer ](#322-jenkins-plugins)
-        - [3.3 creations du pipeline jenkins ] (#323-create-jenkins-multibranch-pipeline)
+- [3. configuration initial de JENKINS ](#3-configuration-initial-de-JENKINS)
+        - [3.1 Jenkins credentials](#31-Jenkins-credentials)
+        - [3.2 les plugins Jenkins à installer ](#32-les-plugins-Jenkins-à-installer)
+        - [3.3 creations du pipeline jenkins ](#33-creations-du-pipeline-jenkins)
 
-
-
-
-
-## 1. creation d'un compartiment S3 pour le stockage des fichier state
+##1 . creation d'un compartiment S3 pour le stockage des fichier state
 
 Connectez-vous à la AWS Management Console et ouvrez la console Amazon S3 à l'adresse https://console.aws.amazon.com/s3/
 
@@ -55,27 +52,62 @@ compartiment, consultez la section Règles de dénomination de compartiment.
 
 ## 2. Installation du serveur Jenkins
 
+  ## 2.1 Installation de  JENKINS
+
 ici nous allons installer sur un  serveur local UBUNTU Jenkins qui vas gerer l'execution du pipeline
 
 la version de Jenkins incluse par défaut dans les paquets Ubuntu est souvent inférieure à la dernière version disponible sur le projet en lui-même. Installez Jenkins en utilisant les paquets gérés par le projet pour être sûr de bien avoir les dernières corrections et fonctionnalités.
 
 Tout d’abord, ajoutez la clé du référentiel au système :
 
-    wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -
+     wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -
 
 Une fois la clé ajoutée, le système affichera OK.
 
 Ensuite, ajoutons l’adresse du référentiel Debian sur la sources.list​​​​​​ du serveur :
 
-    sudo sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
+     sudo sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
 
 Une fois les deux commandes saisies, nous exécuterons la update afin que apt utilise le nouveau référentiel.
 
-    sudo apt update
+     sudo apt update
 
 Enfin, nous installerons Jenkins et ses dépendances.
 
-    sudo apt install jenkins
+     sudo apt install jenkins
 
 Maintenant que Jenkins et ses dépendances sont installés, nous allons démarrer le serveur Jenkins.
      sudo systemctl start jenkins
+	 
+	 
+   ##2.2 Installation de Terraform, AWS CLI, Ansible sur le serveur JENKINS
+  afin que le pipeline Jenkins puisse executer le pipeline il est nécéssaire d installer un Terraform et Ansible sur le serveur Jenkins.
+ ci dessous les étapes d installation après connexion au serveur Jenkins 
+ 
+ 
+### Installation de  Terrafom
+     apt-get update
+     apt-get install -y gnupg software-properties-common curl
+     curl -fsSL https://apt.releases.hashicorp.com/gpg | apt-key add -
+     apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+     apt-get update
+     apt-get install -y terraform
+
+
+### Installation de  AWS CLI
+      apt-get install -y awscli
+# After install finished, configure AWS IAM with command: aws configure
+
+
+### Installation de  Ansible
+      apt-get install -y ansible
+
+# Disable host checking in Ansible
+       ansible --version
+       echo "host_key_checking = False" > ~/.ansible/ansible.cfg
+       cat > ~/.ssh/config <<"EOF"
+         Host *
+       StrictHostKeyChecking no
+
+
+## 3. configuration initial de JENKINS"
