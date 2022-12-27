@@ -23,8 +23,8 @@ ci dessous certain objectif de ce projet
 
 - [3. configuration initial de JENKINS ](#3-configuration-initial-de-JENKINS)
         - [3.1 Jenkins credentials](#31-Jenkins-credentials)
-        - [3.2 les plugins Jenkins à installer ](#32-les-plugins-Jenkins-à-installer)
-        - [3.3 creations du pipeline jenkins ](#33-creations-du-pipeline-jenkins)
+        -  [3.2 les plugins Jenkins à installer ](#32-les-plugins-Jenkins-à-installer)
+        -  [3.3 creations du pipeline jenkins ](#33-creations-du-pipeline-jenkins)
 
 ##1 . creation d'un compartiment S3 pour le stockage des fichier state
 
