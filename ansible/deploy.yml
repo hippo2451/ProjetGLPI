@@ -1,5 +1,5 @@
 ---
-- name: "Apache installation using docker container"
+- name: "GLPI installation using docker container"
   hosts: all
   become: true
   
