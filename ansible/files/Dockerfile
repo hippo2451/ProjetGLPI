@@ -10,7 +10,7 @@ RUN apt-get update && \
     rm -Rf glpi-10.0.2.tgz && \
     cp -r glpi/* /var/www/html/ && \
     chmod 755 -R /var/www/html/ && \
-    chown www-data:www-data -R /var/www/html/
-    sed -i "s/Listen 80/Listen 8080/" /etc/apache2/ports.conf
+    chown www-data:www-data -R /var/www/html/ && \
+    sed -i "s/Listen 80/Listen 8080/" /etc/apache2/ports.conf && \
     sed -i "s/80/8080/" /etc/apache2/sites-enabled/000-default.conf 
 ENTRYPOINT ["/usr/sbin/apache2ctl", "-D", "FOREGROUND"]
