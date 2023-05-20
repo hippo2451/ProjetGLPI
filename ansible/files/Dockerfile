@@ -11,12 +11,12 @@ RUN apt-get update && \
     tar -xvf glpi-10.0.2.tgz && \
     rm -Rf glpi-10.0.2.tgz && \
     cp -r glpi/* /var/www/html/ && \
-    useradd --uid 10000 user && \
+    useradd --uid 10000 glpi && \
     chmod 755 -R /var/www/html/ && \
-    chown user:user -R /var/www/html/ && \   
+    chown glpi:glpi -R /var/www/html/ && \   
     chown www-data:www-data -R /var/www/html/ && \
-    chown user:user -R /var/log/apache2/ && \
-    chown user:user -R  /var/run/apache2 && \
+    chown glpi:glpi -R /var/log/apache2/ && \
+    chown glpi:glpi -R  /var/run/apache2 && \
     sed -i "s/Listen 80/Listen 8080/" /etc/apache2/ports.conf && \
     sed -i "s/80/8080/" /etc/apache2/sites-enabled/000-default.conf 
 USER user
